@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+#signup-form,
+#signin-form {
+    width: 300px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input,
+select,
+button {
+    width: 260px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.login-btn,
+.signup-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-btn a,
+.signup-btn a {
+    text-decoration: none;
+}
