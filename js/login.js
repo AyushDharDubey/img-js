@@ -1,27 +1,39 @@
-document.getElementById('signin-form').addEventListener('submit', async function (event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const signInForm = document.getElementById('signInForm');
+    const signInError = document.getElementById('signInError');
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    signInForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        signInError.innerHTML = '';
 
-    try {
-        const response = await fetch('https://reqres.in/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
+        const email = document.getElementById('signInEmail').value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error || 'Failed to sign in');
+        if (!emailRegex.test(email)) {
+            signInError.innerHTML += 'Invalid email format.<br/>';
+            return;
         }
 
-        alert('Sign in successful!');
-        // console.log(data);
-    } catch (error) {
-        alert(error.message);
-    }
+        const password = document.getElementById('signInPassword').value;
+
+        try {
+            const response = await fetch('https://reqres.in/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('Login successful');
+            } else {
+                signInError.innerHTML += result.error;
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    });
 });
